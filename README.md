@@ -2,8 +2,6 @@
 
 > 提醒： 滥用可能导致账户被BAN！！！ 
 
-# 9月21日修复
-
 ## 概述
 
 用于在 Heroku 上部署 vless+websocket+tls，每次部署自动选择最新的 alpine linux 和 Xray core 。  
@@ -20,7 +18,7 @@ vless 性能更加优秀，占用资源更少。
 
 ### 服务端
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new?template=https://github.com/jth445600/HerokuXray) 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new?template=https://github.com/950WhereTheWorld56Million/xray-heroku) 
 
 点击上面紫色`Deploy to Heroku`，会跳转到heroku app创建页面，填上应用的名称、选择节点(建议用欧洲节点，美国节点会自动删除YouTube评论与点赞！)、按需修改部分参数和UUID后点击下面`deploy`开始创建部署应用  
 如出现错误，可以多尝试几次，待部署完成后页面底部会显示`Your app was successfully deployed` 
@@ -97,20 +95,10 @@ vless 性能更加优秀，占用资源更少。
 <summary>可以使用Cloudflare的Workers来中转流量，（支持VLESS\VMESS\Trojan-Go的WS模式）配置为：</summary>
 
 ```js
-const SingleDay = 'xxx.herokuapp.com'
-const DoubleDay = 'xxx.herokuapp.com'
 addEventListener(
     "fetch",event => {
-    
-        let nd = new Date();
-        if (nd.getDate()%2) {
-            host = SingleDay
-        } else {
-            host = DoubleDay
-        }
-        
         let url=new URL(event.request.url);
-        url.hostname=host;
+        url.hostname="appname.herokuapp.com";
         let request=new Request(url,event.request);
         event. respondWith(
             fetch(request)
